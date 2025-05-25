@@ -1,8 +1,8 @@
 === RESTAURANT BILL ===
-Customer: MINARA
-Date: 2025-05-25 13:07:12.218504
+Customer: Minara
+Date: 2025-05-25 18:23:40.422290
 -------------------------
-Burger x1 = RMB 5.99
+Pizza x3 = RMB 23.97
 -------------------------
-Total: RMB 5.99
+Total: RMB 23.97
 Thank you! Please visit again.

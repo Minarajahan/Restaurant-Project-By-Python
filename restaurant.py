@@ -1,6 +1,8 @@
+# restaurant.py
+
 class MenuItem:
-    def __init__(self, id, name, price):
-        self.id = id
+    def __init__(self, item_id, name, price):
+        self.id = item_id
         self.name = name
         self.price = price
 
@@ -8,131 +10,63 @@ class Menu:
     def __init__(self):
         self.items = []
 
-    def load_menu(self):
-        # Default menu items
-        self.items = [
-            MenuItem(1, "Burger", 5.99),
-            MenuItem(2, "Pizza", 7.99),
-            MenuItem(3, "Coffee", 2.50),
-            MenuItem(4, "Salad", 4.75)
-        ]
+    def load_menu(self, filename="menu.csv"):
+        with open(filename, "r", encoding="utf-8") as file:
+            for line in file:
+                parts = line.strip().split(',')
+                if len(parts) == 3:
+                    item_id, name, price = parts
+                    self.items.append(MenuItem(int(item_id), name, float(price)))
 
     def display_menu(self):
-        print("Menu:")
+        print("\nMenu:")
         for item in self.items:
             print(f"{item.id}. {item.name} - RMB {item.price:.2f}")
 
-    def get_item_by_id(self, id):
+    def get_item_by_id(self, item_id):
         for item in self.items:
-            if item.id == id:
+            if item.id == item_id:
                 return item
         return None
-
-    def add_menu_item(self, name, price):
-        new_id = 1
-        if self.items:
-            new_id = max(item.id for item in self.items) + 1
-        self.items.append(MenuItem(new_id, name, price))
-        print(f"Added {name} with ID {new_id} and price RMB {price:.2f}")
-
-    def remove_menu_item(self, id):
-        before = len(self.items)
-        self.items = [item for item in self.items if item.id != id]
-        after = len(self.items)
-        if before == after:
-            print("Item not found.")
-        else:
-            print(f"Removed item with ID {id}")
-
-    def update_menu_item(self, id, new_name, new_price):
-        for item in self.items:
-            if item.id == id:
-                item.name = new_name
-                item.price = new_price
-                print(f"Updated item ID {id} to {new_name} at price RMB {new_price:.2f}")
-                return
-        print("Item not found.")
-
-class OrderItem:
-    def __init__(self, menu_item, quantity):
-        self.menu_item = menu_item
-        self.quantity = quantity
-
-    def get_total_price(self):
-        return self.menu_item.price * self.quantity
 
 class Order:
     def __init__(self):
         self.items = []
 
-    def add_item(self, menu_item, quantity):
-        self.items.append(OrderItem(menu_item, quantity))
+    def add_item(self, item, quantity):
+        self.items.append((item, quantity))
 
     def display_order(self):
         print("\nYour Order:")
-        for item in self.items:
-            print(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}")
-        total = sum(item.get_total_price() for item in self.items)
+        total = 0
+        for item, qty in self.items:
+            subtotal = item.price * qty
+            print(f"{item.name} x{qty} = RMB {subtotal:.2f}")
+            total += subtotal
         print(f"Total: RMB{total:.2f}")
 
     def save_order_to_file(self, customer_name):
-        with open("orders.txt", "a") as file:
-            file.write(f"Order by {customer_name}:\n")
-            for item in self.items:
-                file.write(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}\n")
-            total = sum(item.get_total_price() for item in self.items)
-            file.write(f"Total: RMB {total:.2f}\n")
-            file.write("-------------------------\n")
-
-    def print_bill(self, customer_name):
         from datetime import datetime
-        total = sum(item.get_total_price() for item in self.items)
-        filename = f"bill_{customer_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
-        with open(filename, "w") as file:
-            file.write("=== RESTAURANT BILL ===\n")
-            file.write(f"Customer: {customer_name}\n")
-            file.write(f"Date: {datetime.now()}\n")
-            file.write("-------------------------\n")
-            for item in self.items:
-                file.write(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}\n")
-            file.write("-------------------------\n")
-            file.write(f"Total: RMB {total:.2f}\n")
-            file.write("Thank you! Please visit again.\n")
-        print(f"Bill saved as {filename} ✅")
+        filename = "orders.txt"
+        total = sum(item.price * qty for item, qty in self.items)
+        with open(filename, "a", encoding="utf-8") as f:
+            f.write(f"{datetime.now()} - {customer_name}: RMB{total:.2f}\n")
 
     def get_bill_text(self, customer_name):
         from datetime import datetime
-        total = sum(item.get_total_price() for item in self.items)
-        lines = [
-            "=== RESTAURANT BILL ===",
-            f"Customer: {customer_name}",
-            f"Date: {datetime.now()}",
-            "-------------------------"
-        ]
-        for item in self.items:
-            lines.append(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}")
-        lines.append("-------------------------")
-        lines.append(f"Total: RMB={total:.2f}")
-        lines.append("Thank you!")
-        return "\n".join(lines)
+        lines = [f"Customer: {customer_name}", f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}", ""]
+        total = 0
+        for item, qty in self.items:
+            subtotal = item.price * qty
+            lines.append(f"{item.name} x{qty} = RMB {subtotal:.2f}")
+            total += subtotal
+        lines.append(f"\nTotal: RMB{total:.2f}")
+        return '\n'.join(lines)
 
-
-##REVIEW-----
-
-class Review:
-    @staticmethod
-    def save_review(name, rating, comment):
-        with open("reviews.txt", "a", encoding="utf-8") as file:
-            file.write(f"{name},{rating},{comment}\n")
-
-    @staticmethod
-    def display_reviews():
-        print("\n--- Customer Reviews ---")
-        try:
-            with open("reviews.txt", "r", encoding="utf-8") as file:
-                for line in file:
-                    name, rating, comment = line.strip().split(",", 2)
-                    stars = "★" * int(rating)
-                    print(f"{name} | {stars} Stars | {comment}")
-        except FileNotFoundError:
-            print("No reviews found.")
+    def print_bill(self, customer_name):
+        from datetime import datetime
+        filename = f"bill_{customer_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        bill_text = self.get_bill_text(customer_name)
+        with open(filename, "w", encoding="utf-8") as f:
+            f.write(bill_text)
+        print(f"Bill saved as {filename} ✅")

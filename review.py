@@ -9,3 +9,16 @@ def collect_review(customer_name):
         print("✅ Thank you for your review!")
     else:
         print("⏩ No review submitted.")
+
+def show_reviews(num=5):
+    print("\n📋 Recent Customer Reviews:")
+    try:
+        with open("reviews.txt", "r", encoding="utf-8") as file:
+            lines = file.readlines()
+            if not lines:
+                print("No reviews found.")
+                return
+            for line in lines[-num:]:
+                print(f"- {line.strip()}")
+    except FileNotFoundError:
+        print("No reviews found.")

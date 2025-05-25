@@ -1,0 +1,6 @@
+Customer: Jahan
+Date: 2025-05-25 18:48:36
+
+Pizza x2 = RMB 17.98
+
+Total: RMB17.98

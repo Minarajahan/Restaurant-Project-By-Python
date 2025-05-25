@@ -58,3 +58,29 @@ Order by Jahan:
 Coffee x1 = RMB 2.50
 Total: RMB 2.50
 -------------------------
+Order by minara:
+Salad x3 = RMB 14.25
+Total: RMB 14.25
+-------------------------
+Order by Minara:
+Coffee x4 = RMB 10.00
+Total: RMB 10.00
+-------------------------
+Order by Minara:
+Pizza x3 = RMB 23.97
+Total: RMB 23.97
+-------------------------
+Order by Jahan:
+Salad x2 = RMB 9.50
+Total: RMB 9.50
+-------------------------
+Order by Minara:
+Burger x2 = RMB 11.98
+Total: RMB 11.98
+-------------------------
+Order by Minara:
+Burger x2 = RMB 11.98
+Coffee x4 = RMB 10.00
+Total: RMB 21.98
+-------------------------
+2025-05-25 18:48:36.293736 - Jahan: RMB17.98

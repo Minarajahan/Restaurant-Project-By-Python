@@ -1,9 +1,8 @@
 === RESTAURANT BILL ===
-Customer: Minara Jahan
-Date: 2025-05-25 12:32:00.935828
+Customer: Jahan
+Date: 2025-05-25 18:29:59.931738
 -------------------------
-Coffee x2 = $5.00
-Salad x10 = $47.50
+Salad x2 = RMB 9.50
 -------------------------
-Total: $52.50
+Total: RMB 9.50
 Thank you! Please visit again.

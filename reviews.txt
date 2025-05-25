@@ -1,0 +1,2 @@
+2025-05-25 18:17:44 | minara: python -u "/c/python/Restaurant Project/main.py"
+2025-05-25 18:35:17 | Jahan: python -u "/c/python/Restaurant Project/main.py"
