@@ -115,3 +115,24 @@ class Order:
         lines.append(f"Total: RMB={total:.2f}")
         lines.append("Thank you!")
         return "\n".join(lines)
+
+
+##REVIEW-----
+
+class Review:
+    @staticmethod
+    def save_review(name, rating, comment):
+        with open("reviews.txt", "a", encoding="utf-8") as file:
+            file.write(f"{name},{rating},{comment}\n")
+
+    @staticmethod
+    def display_reviews():
+        print("\n--- Customer Reviews ---")
+        try:
+            with open("reviews.txt", "r", encoding="utf-8") as file:
+                for line in file:
+                    name, rating, comment = line.strip().split(",", 2)
+                    stars = "★" * int(rating)
+                    print(f"{name} | {stars} Stars | {comment}")
+        except FileNotFoundError:
+            print("No reviews found.")

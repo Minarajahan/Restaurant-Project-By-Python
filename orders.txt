@@ -54,3 +54,7 @@ Order by MINARA:
 Burger x1 = RMB 5.99
 Total: RMB 5.99
 -------------------------
+Order by Jahan:
+Coffee x1 = RMB 2.50
+Total: RMB 2.50
+-------------------------

@@ -1,0 +1,8 @@
+=== RESTAURANT BILL ===
+Customer: Jahan
+Date: 2025-05-25 17:53:54.823227
+-------------------------
+Coffee x1 = RMB 2.50
+-------------------------
+Total: RMB 2.50
+Thank you! Please visit again.
