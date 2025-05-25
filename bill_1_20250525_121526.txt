@@ -1,0 +1,8 @@
+=== RESTAURANT BILL ===
+Customer: 1
+Date: 2025-05-25 12:15:26.285987
+-------------------------
+Burger x1 = $5.99
+-------------------------
+Total: $5.99
+Thank you! Please visit again.

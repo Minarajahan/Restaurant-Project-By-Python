@@ -1,43 +1,33 @@
 # restaurant.py
 
 class MenuItem:
-    def __init__(self, item_id, name, price):
-        self.item_id = item_id
+    def __init__(self, id, name, price):
+        self.id = id
         self.name = name
         self.price = price
-
-    def __str__(self):
-        return f"{self.item_id}. {self.name} - ${self.price:.2f}"
-
 
 class Menu:
     def __init__(self):
         self.items = []
 
     def load_menu(self):
-        try:
-            with open("menu.txt", "r") as file:
-                for line in file:
-                    parts = line.strip().split(",")
-                    if len(parts) == 3:
-                        item = MenuItem(int(parts[0]), parts[1], float(parts[2]))
-                        self.items.append(item)
-        except FileNotFoundError:
-            print("Menu file not found. Starting with an empty menu.")
+        self.items = [
+            MenuItem(1, "Burger", 5.99),
+            MenuItem(2, "Pizza", 7.99),
+            MenuItem(3, "Coffee", 2.50),
+            MenuItem(4, "Salad", 4.75)
+        ]
 
     def display_menu(self):
-        print("\n--- MENU ---")
+        print("Menu:")
         for item in self.items:
-            print(item)
+            print(f"{item.id}. {item.name} - ${item.price}")
 
-    def get_item_by_id(self, item_id):
+    def get_item_by_id(self, id):
         for item in self.items:
-            if item.item_id == item_id:
+            if item.id == id:
                 return item
         return None
-
-
-# ✅ Add these classes below the Menu class — for ordering
 
 class OrderItem:
     def __init__(self, menu_item, quantity):
@@ -47,10 +37,6 @@ class OrderItem:
     def get_total_price(self):
         return self.menu_item.price * self.quantity
 
-    def __str__(self):
-        return f"{self.menu_item.name} x{self.quantity} = ${self.get_total_price():.2f}"
-
-
 class Order:
     def __init__(self):
         self.items = []
@@ -59,9 +45,49 @@ class Order:
         self.items.append(OrderItem(menu_item, quantity))
 
     def display_order(self):
-        print("\n--- ORDER SUMMARY ---")
-        total = 0
+        print("\nYour Order:")
         for item in self.items:
-            print(item)
-            total += item.get_total_price()
-        print(f"\nTotal Bill: ${total:.2f}")
+            print(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}")
+        total = sum(item.get_total_price() for item in self.items)
+        print(f"Total: ${total:.2f}")
+
+    def save_order_to_file(self, customer_name):
+        with open("orders.txt", "a") as file:
+            file.write(f"Order by {customer_name}:\n")
+            for item in self.items:
+                file.write(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}\n")
+            total = sum(item.get_total_price() for item in self.items)
+            file.write(f"Total: ${total:.2f}\n")
+            file.write("-------------------------\n")
+
+    def print_bill(self, customer_name):
+        from datetime import datetime
+        total = sum(item.get_total_price() for item in self.items)
+        filename = f"bill_{customer_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        with open(filename, "w") as file:
+            file.write("=== RESTAURANT BILL ===\n")
+            file.write(f"Customer: {customer_name}\n")
+            file.write(f"Date: {datetime.now()}\n")
+            file.write("-------------------------\n")
+            for item in self.items:
+                file.write(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}\n")
+            file.write("-------------------------\n")
+            file.write(f"Total: ${total:.2f}\n")
+            file.write("Thank you! Please visit again.\n")
+        print(f"Bill saved as {filename} ✅")
+
+    def get_bill_text(self, customer_name):
+        from datetime import datetime
+        total = sum(item.get_total_price() for item in self.items)
+        lines = [
+            "=== RESTAURANT BILL ===",
+            f"Customer: {customer_name}",
+            f"Date: {datetime.now()}",
+            "-------------------------"
+        ]
+        for item in self.items:
+            lines.append(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}")
+        lines.append("-------------------------")
+        lines.append(f"Total: ${total:.2f}")
+        lines.append("Thank you!")
+        return "\n".join(lines)
