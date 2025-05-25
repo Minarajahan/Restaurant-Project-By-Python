@@ -1,0 +1,4 @@
+1,Burger,5.99
+2,Pizza,8.99
+3,Pasta,6.49
+4,Coffee,2.50
