@@ -1,5 +1,3 @@
-# restaurant.py
-
 class MenuItem:
     def __init__(self, id, name, price):
         self.id = id
@@ -11,6 +9,7 @@ class Menu:
         self.items = []
 
     def load_menu(self):
+        # Default menu items
         self.items = [
             MenuItem(1, "Burger", 5.99),
             MenuItem(2, "Pizza", 7.99),
@@ -21,13 +20,38 @@ class Menu:
     def display_menu(self):
         print("Menu:")
         for item in self.items:
-            print(f"{item.id}. {item.name} - ${item.price}")
+            print(f"{item.id}. {item.name} - RMB {item.price:.2f}")
 
     def get_item_by_id(self, id):
         for item in self.items:
             if item.id == id:
                 return item
         return None
+
+    def add_menu_item(self, name, price):
+        new_id = 1
+        if self.items:
+            new_id = max(item.id for item in self.items) + 1
+        self.items.append(MenuItem(new_id, name, price))
+        print(f"Added {name} with ID {new_id} and price RMB {price:.2f}")
+
+    def remove_menu_item(self, id):
+        before = len(self.items)
+        self.items = [item for item in self.items if item.id != id]
+        after = len(self.items)
+        if before == after:
+            print("Item not found.")
+        else:
+            print(f"Removed item with ID {id}")
+
+    def update_menu_item(self, id, new_name, new_price):
+        for item in self.items:
+            if item.id == id:
+                item.name = new_name
+                item.price = new_price
+                print(f"Updated item ID {id} to {new_name} at price RMB {new_price:.2f}")
+                return
+        print("Item not found.")
 
 class OrderItem:
     def __init__(self, menu_item, quantity):
@@ -47,17 +71,17 @@ class Order:
     def display_order(self):
         print("\nYour Order:")
         for item in self.items:
-            print(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}")
+            print(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}")
         total = sum(item.get_total_price() for item in self.items)
-        print(f"Total: ${total:.2f}")
+        print(f"Total: RMB{total:.2f}")
 
     def save_order_to_file(self, customer_name):
         with open("orders.txt", "a") as file:
             file.write(f"Order by {customer_name}:\n")
             for item in self.items:
-                file.write(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}\n")
+                file.write(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}\n")
             total = sum(item.get_total_price() for item in self.items)
-            file.write(f"Total: ${total:.2f}\n")
+            file.write(f"Total: RMB {total:.2f}\n")
             file.write("-------------------------\n")
 
     def print_bill(self, customer_name):
@@ -70,9 +94,9 @@ class Order:
             file.write(f"Date: {datetime.now()}\n")
             file.write("-------------------------\n")
             for item in self.items:
-                file.write(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}\n")
+                file.write(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}\n")
             file.write("-------------------------\n")
-            file.write(f"Total: ${total:.2f}\n")
+            file.write(f"Total: RMB {total:.2f}\n")
             file.write("Thank you! Please visit again.\n")
         print(f"Bill saved as {filename} ✅")
 
@@ -86,8 +110,8 @@ class Order:
             "-------------------------"
         ]
         for item in self.items:
-            lines.append(f"{item.menu_item.name} x{item.quantity} = ${item.get_total_price():.2f}")
+            lines.append(f"{item.menu_item.name} x{item.quantity} = RMB {item.get_total_price():.2f}")
         lines.append("-------------------------")
-        lines.append(f"Total: ${total:.2f}")
+        lines.append(f"Total: RMB={total:.2f}")
         lines.append("Thank you!")
         return "\n".join(lines)

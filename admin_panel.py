@@ -1,4 +1,3 @@
-# admin_panel.py
 from restaurant import Menu
 
 menu = Menu()
@@ -11,6 +10,7 @@ while True:
     print("3. Remove Item")
     print("4. Update Item")
     print("5. Exit")
+
     choice = input("Enter your choice: ")
 
     if choice == "1":

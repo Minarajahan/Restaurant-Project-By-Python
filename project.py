@@ -3,8 +3,12 @@ from PIL import Image, ImageDraw, ImageFont, ImageTk
 import tkinter as tk
 
 def create_bill_image(bill_text, filename="bill.png"):
-    # Create an image large enough for the bill text (adjust size if needed)
-    img = Image.new('RGB', (400, 300), color='white')
+    lines = bill_text.split('\n')
+    width = 400
+    line_height = 20
+    height = line_height * (len(lines) + 2)
+
+    img = Image.new('RGB', (width, height), color='white')
     d = ImageDraw.Draw(img)
 
     try:
@@ -12,7 +16,11 @@ def create_bill_image(bill_text, filename="bill.png"):
     except:
         font = ImageFont.load_default()
 
-    d.text((10, 10), bill_text, fill='black', font=font)
+    y_text = 10
+    for line in lines:
+        d.text((10, y_text), line, fill='black', font=font)
+        y_text += line_height
+
     img.save(filename)
     return filename
 
@@ -24,7 +32,7 @@ def show_image(filename):
     img = ImageTk.PhotoImage(img)
 
     panel = tk.Label(root, image=img)
-    panel.image = img  # Keep reference!
+    panel.image = img  # keep a reference
     panel.pack()
 
     root.mainloop()
@@ -49,6 +57,10 @@ def main():
                 print("Invalid item ID. Please try again.")
         except ValueError:
             print("Invalid input. Please enter a number.")
+
+    if not order.items:
+        print("No items ordered. Exiting.")
+        return
 
     order.display_order()
 

@@ -1,0 +1,8 @@
+=== RESTAURANT BILL ===
+Customer: MINARA
+Date: 2025-05-25 13:05:08.792917
+-------------------------
+Burger x1 = RMB5.99
+-------------------------
+Total: $5.99
+Thank you! Please visit again.

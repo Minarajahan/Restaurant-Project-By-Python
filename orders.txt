@@ -30,3 +30,27 @@ Order by 1:
 Burger x1 = $5.99
 Total: $5.99
 -------------------------
+Order by Minara Jahan:
+Coffee x2 = $5.00
+Salad x10 = $47.50
+Total: $52.50
+-------------------------
+Order by Jahan:
+Pizza x50 = $399.50
+Pizza x34 = $271.66
+Coffee x12 = $30.00
+Salad x20 = $95.00
+Total: $796.16
+-------------------------
+Order by Minara:
+Burger x4 = $23.96
+Total: $23.96
+-------------------------
+Order by MINARA:
+Burger x1 = RMB5.99
+Total: RMB5.99
+-------------------------
+Order by MINARA:
+Burger x1 = RMB 5.99
+Total: RMB 5.99
+-------------------------
