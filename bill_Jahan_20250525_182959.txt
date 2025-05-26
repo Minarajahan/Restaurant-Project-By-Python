@@ -1,8 +1,0 @@
-=== RESTAURANT BILL ===
-Customer: Jahan
-Date: 2025-05-25 18:29:59.931738
--------------------------
-Salad x2 = RMB 9.50
--------------------------
-Total: RMB 9.50
-Thank you! Please visit again.

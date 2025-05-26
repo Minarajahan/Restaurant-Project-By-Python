@@ -1,2 +1,8 @@
-2025-05-25 18:17:44 | minara: python -u "/c/python/Restaurant Project/main.py"
-2025-05-25 18:35:17 | Jahan: python -u "/c/python/Restaurant Project/main.py"
+2025-05-26 19:59:27 | Ratre: Good Service!
+2025-05-26 20:05:00 | Minara: Good Environment!
+2025-05-26 20:06:39 | RITA: Services Faster!
+2025-05-26 20:11:05 | Minara Jahan: Everything Good!
+2025-05-26 21:01:21 | Ratre: GOOD!
+2025-05-26 21:06:48 | SUKU: python -u "/c/python/Restaurant Project/main.py"
+2025-05-26 21:15:26 | Minara: EVERYTHING GOOD
+2025-05-26 21:21:05 | Minara Jahan: Thanks

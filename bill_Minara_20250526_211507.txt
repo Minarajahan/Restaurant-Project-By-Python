@@ -1,0 +1,6 @@
+Your Order:
+Pizza x3 RMB = 26.97
+Burger x2 RMB = 11.98
+Pasta x1 RMB = 6.49
+----------------------------------------
+Total RMB = 45.44

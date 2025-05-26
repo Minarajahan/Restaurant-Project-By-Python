@@ -1,41 +1,5 @@
 from restaurant import Menu, Order
-from PIL import Image, ImageDraw, ImageFont, ImageTk
-import tkinter as tk
-
-def create_bill_image(bill_text, filename="bill.png"):
-    lines = bill_text.split('\n')
-    width = 400
-    line_height = 20
-    height = line_height * (len(lines) + 2)
-
-    img = Image.new('RGB', (width, height), color='white')
-    d = ImageDraw.Draw(img)
-
-    try:
-        font = ImageFont.truetype("arial.ttf", 15)
-    except:
-        font = ImageFont.load_default()
-
-    y_text = 10
-    for line in lines:
-        d.text((10, y_text), line, fill='black', font=font)
-        y_text += line_height
-
-    img.save(filename)
-    return filename
-
-def show_image(filename):
-    root = tk.Tk()
-    root.title("Bill")
-
-    img = Image.open(filename)
-    img = ImageTk.PhotoImage(img)
-
-    panel = tk.Label(root, image=img)
-    panel.image = img  # keep a reference
-    panel.pack()
-
-    root.mainloop()
+from review import collect_review, show_reviews
 
 def main():
     menu = Menu()
@@ -52,25 +16,31 @@ def main():
             item = menu.get_item_by_id(item_id)
             if item:
                 quantity = int(input(f"Enter quantity for {item.name}: "))
-                order.add_item(item, quantity)
+                if quantity > 0:
+                    order.add_item(item, quantity)
+                else:
+                    print("Quantity must be positive.")
             else:
-                print("Invalid item ID. Please try again.")
+                print("Invalid item number. Try again.")
         except ValueError:
-            print("Invalid input. Please enter a number.")
+            print("Please enter valid numbers.")
 
     if not order.items:
-        print("No items ordered. Exiting.")
+        print("No items ordered. Goodbye!")
         return
 
     order.display_order()
 
-    name = input("\nEnter your name to save the order: ")
+    name = input("\nEnter your name to save the order: ").strip()
+    if not name:
+        name = "Customer"
+
     order.save_order_to_file(name)
     order.print_bill(name)
+    order.save_bill_as_image(name)  # <-- save bill as image here
 
-    bill_text = order.get_bill_text(name)
-    filename = create_bill_image(bill_text)
-    show_image(filename)
+    collect_review(name)
+    show_reviews()
 
 if __name__ == "__main__":
     main()

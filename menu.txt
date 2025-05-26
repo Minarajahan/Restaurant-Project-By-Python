@@ -2,3 +2,5 @@
 2,Pizza,8.99
 3,Pasta,6.49
 4,Coffee,2.50
+5,Lemon Juice,3.00
+6,Tea,2

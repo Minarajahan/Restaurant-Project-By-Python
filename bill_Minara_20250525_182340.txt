@@ -1,8 +1,0 @@
-=== RESTAURANT BILL ===
-Customer: Minara
-Date: 2025-05-25 18:23:40.422290
--------------------------
-Pizza x3 = RMB 23.97
--------------------------
-Total: RMB 23.97
-Thank you! Please visit again.

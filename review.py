@@ -1,4 +1,3 @@
-# review.py
 from datetime import datetime
 
 def collect_review(customer_name):

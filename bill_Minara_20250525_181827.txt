@@ -1,8 +1,0 @@
-=== RESTAURANT BILL ===
-Customer: Minara
-Date: 2025-05-25 18:18:27.845463
--------------------------
-Coffee x4 = RMB 10.00
--------------------------
-Total: RMB 10.00
-Thank you! Please visit again.
